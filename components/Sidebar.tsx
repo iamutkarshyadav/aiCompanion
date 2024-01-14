@@ -2,11 +2,12 @@
 import { cn } from '@/lib/utils';
 
 import { Home, Plus, Settings } from 'lucide-react';
-import { usePathname } from 'next/navigation';
+import { usePathname , useRouter} from 'next/navigation';
 import React from 'react';  
 
 const Sidebar = () => {
-  const pathname = usePathname();;
+  const pathname = usePathname();
+  const router = useRouter();
   const routes = [
     {
       icon: Home,
@@ -27,13 +28,17 @@ const Sidebar = () => {
       pro: false,
     }
   ];
-  
-  return (
+
+  const onNavigate = (url: string, pro: boolean) => {
+  return router.push(url);
+  }
+ return (
     <div className="flex flex-col h-full text-primary bg-secondary">
-      <div className="p-3 flex-1 justify-center overflow-y-auto">
+      <div className="p-3 flex flex-1 justify-center overflow-y-auto">
         <div className="space-y-2">
           {routes.map((route, i) => (
-            <div
+            <div 
+              onClick={() => onNavigate(route.href, route.pro)}
               key={route.href}
               className={cn(
                 "text-muted-foreground text-xs group flex p-3 w-full justify-start font-medium cursor-pointer hover:text-primary hover:bg-primary/10 rounded-lg transition",
@@ -41,9 +46,9 @@ const Sidebar = () => {
               )}
             >
               <div className="flex flex-col gap-y-2 items-center flex-1">
-                {/* Add any components or content you want here */}
+                <route.icon className="h-5 w-5" />
+                {route.label}
               </div>
-              <route.icon className="h-5 w-5" />
             </div>
           ))}
         </div>
