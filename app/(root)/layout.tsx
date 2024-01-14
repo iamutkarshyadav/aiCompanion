@@ -1,21 +1,26 @@
-import React from 'react';  
+import Sidebar from "@/components/Sidebar";
+import  Navbar  from "@/components/navbar";
 
-import Sidebar from '@/components/Sidebar';  
-import Navbar from '@/components/navbar';  
+//import { checkSubscription } from "@/lib/subscription";
 
-const RootLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  return (
-    <div className="h-full flex flex-col">
+const RootLayout = async ({
+  children
+}: {
+  children: React.ReactNode;
+}) => {
+  //const isPro = await checkSubscription();
+
+  return ( 
+    <div className="h-full">
       <Navbar />
-      <div className="hidden md:flex mt-16 w-20 flex-col">
+      <div className="hidden md:flex mt-16 h-full w-20 flex-col fixed inset-y-0">
         <Sidebar />
       </div>
-      <main className="md:pl-20 pt-16 flex-1">
+      <main className="md:pl-20 pt-16 h-full">
         {children}
       </main>
     </div>
-  );
-};
-
+   );
+}
+ 
 export default RootLayout;
-
