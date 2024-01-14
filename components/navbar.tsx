@@ -8,6 +8,7 @@ import { UserButton } from '@clerk/nextjs';
 import { Button } from '@/components/ui/button';
 
 import { cn } from '@/lib/utils';
+import { ModeToggle } from './mode-toggle';
 
 
 
@@ -34,6 +35,7 @@ const Navbar = () => {
           Upgrade
           <Sparkle className=' h-4 w-4 fill-white text-white ml-2'/>
         </Button>
+        <ModeToggle/>
         <UserButton />
       </div>
     </div>
