@@ -1,5 +1,4 @@
-// components/search-input.tsx
-"use client"; // Place the "use client" pragma at the beginning of the file
+"use client"; 
 
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
