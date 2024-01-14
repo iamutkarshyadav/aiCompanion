@@ -30,7 +30,7 @@ const Navbar = () => {
         </Link>
       </div>
       <div className='flex items-center gap-x-3'>
-        <Button size= "sm">
+        <Button variant='premium' size= "sm">
           Upgrade
           <Sparkle className=' h-4 w-4 fill-white text-white ml-2'/>
         </Button>
