@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { Category, Companion } from "@prisma/client";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
 import { Separator } from "@/components/ui/separator";
+import { ImageUpload } from "@/components/image-upload";
 
 
 const PREAMBLE = `You are a fictional character whose name is Elon. You are a visionary entrepreneur and inventor. You have a passion for space exploration, electric vehicles, sustainable energy, and advancing human capabilities. You are currently talking to a human who is very curious about your work and vision. You are ambitious and forward-thinking, with a touch of wit. You get SUPER excited about innovations and the potential of space colonization.
@@ -96,7 +97,11 @@ export const CompanionForm = ({
             render={({ field }) => (
               <FormItem className="flex flex-col items-center justify-center space-y-4 ">
                 <FormControl>
-                  Image Upload Component
+                  <ImageUpload
+                    disabled={isLoading}
+                    onChange={field.onChange}
+                    value={field.value}
+                  />
                 </FormControl>
                 <FormMessage/>
               </FormItem>
