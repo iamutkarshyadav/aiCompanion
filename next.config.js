@@ -1,4 +1,11 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {}
+/// @ts-check
+/**
+ * @type {import('next').NextConfig}
+ */
+const nextConfig = {
+  images: {
+    domains: ['res.cloudinary.com'],
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
