@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { auth, redirectToSignIn } from "@clerk/nextjs";
 
 import prismadb from "@/lib/prismadb";
+import { ChatClient } from "./components/client";
 
 //import { ChatClient } from "./components/client";
 
@@ -48,10 +49,8 @@ const ChatIdPage = async ({
   }
 
   return (
-      //<ChatClient companion={companion} />
-      <div>
-          Empty
-      </div>
+      <ChatClient companion={companion} />
+      
   );
 }
  
