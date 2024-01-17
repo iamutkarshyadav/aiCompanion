@@ -23,6 +23,7 @@
     "@radix-ui/react-separator": "^1.0.3",
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-toast": "^1.1.5",
+    "@stripe/stripe-js": "^2.3.0",
     "@upstash/ratelimit": "^1.0.0",
     "@upstash/redis": "^1.28.1",
     "ai": "^2.2.31",
