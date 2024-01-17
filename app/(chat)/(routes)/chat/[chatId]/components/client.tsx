@@ -19,7 +19,6 @@ interface ChatClientProps{
     };
 }
 
-
 export const ChatClient = ({
     companion
 }: ChatClientProps) => {
