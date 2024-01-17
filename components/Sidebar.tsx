@@ -1,36 +1,52 @@
 "use client"
+import { useProModal } from '@/hooks/use-pro-modal';
 import { cn } from '@/lib/utils';
 
 import { Home, Plus, Settings } from 'lucide-react';
 import { usePathname , useRouter} from 'next/navigation';
 import React from 'react';  
 
-const Sidebar = () => {
-  const pathname = usePathname();
+interface SidebarProps {
+  isPro: boolean;
+}
+
+
+
+const Sidebar = ({
+  isPro
+}: SidebarProps) => {
+  const proModal = useProModal();
   const router = useRouter();
+  const pathname = usePathname();
+
+  const onNavigate = (url: string, pro: boolean) => {
+    if (pro && !isPro) {
+      return proModal.onOpen();
+    }
+
+    return router.push(url);
+  }
+
   const routes = [
     {
       icon: Home,
       href: '/',
-      label: 'Home',
+      label: "Home",
       pro: false,
     },
     {
       icon: Plus,
-      href: '/companion/new',      label: 'Create',
-      pro: false,
+      href: '/companion/new',
+      label: "Create",
+      pro: true,
     },
     {
       icon: Settings,
       href: '/settings',
-      label: 'Settings',
+      label: "Settings",
       pro: false,
-    }
+    },
   ];
-
-  const onNavigate = (url: string, pro: boolean) => {
-  return router.push(url);
-  }
  return (
     <div className="flex flex-col h-full text-primary bg-secondary">
       <div className="p-3 flex flex-1 justify-center overflow-y-auto">
