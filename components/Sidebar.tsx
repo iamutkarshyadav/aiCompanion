@@ -10,8 +10,6 @@ interface SidebarProps {
   isPro: boolean;
 }
 
-
-
 const Sidebar = ({
   isPro
 }: SidebarProps) => {
