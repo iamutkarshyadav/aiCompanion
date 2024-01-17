@@ -1,7 +1,8 @@
-import prismadb from "@/lib/prismadb";
-
 import { auth, currentUser } from "@clerk/nextjs";
-import { NextResponse } from "next/server"
+import { NextResponse } from "next/server";
+
+import prismadb from "@/lib/prismadb";
+import { checkSubscription } from "@/lib/subscription";
 
 export async function PATCH(
   req: Request,
@@ -23,7 +24,14 @@ export async function PATCH(
     if (!src || !name || !description || !instructions || !seed || !categoryId) {
       return new NextResponse("Missing required fields", { status: 400 });
     };
-     const companion = await prismadb.companion.update({
+
+    const isPro = await checkSubscription();
+
+    if (!isPro) {
+      return new NextResponse("Pro subscription required", { status: 403 });
+    }
+
+    const companion = await prismadb.companion.update({
       where: {
         id: params.companionId,
         //userId: user.id,
@@ -49,23 +57,25 @@ export async function PATCH(
 
 export async function DELETE(
   request: Request,
-  {params} : {params:{companionId:string}}
+  { params }: { params: { companionId: string } }
 ) {
   try {
-    const { userId } = auth()
-    if (!userId) {
-      return new NextResponse("Unauthorized", {status:401})
-    }
-    const companion = await prismadb.companion.delete({
-  where: {
-    id: params.companionId,
-    }
-  })
-    return NextResponse.json(companion);
-    
+    const { userId } = auth();
 
+    if (!userId) {
+      return new NextResponse("Unauthorized", { status: 401 });
+    }
+
+    const companion = await prismadb.companion.delete({
+      where: {
+        //userId,
+        id: params.companionId
+      }
+    });
+
+    return NextResponse.json(companion);
   } catch (error) {
-    console.log("[COMPANION_DELETE]", error)
+    console.log("[COMPANION_DELETE]", error);
     return new NextResponse("Internal Error", { status: 500 });
   }
-}
+};
